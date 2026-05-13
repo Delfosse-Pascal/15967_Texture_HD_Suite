@@ -1,0 +1,66 @@
+# Sous-dossiers : conserver uniquement les tiroirs de base
+Musique/*/
+Texture_HD_A/*/
+Texture_HD_B/*/
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.webp
+*.svg
+*.ico
+*.psd
+*.tga
+*.raw
+*.heic
+
+# PDF
+*.pdf
+
+# Vidéos
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.mpg
+*.mpeg
+*.m4v
+*.3gp
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.tgz
+*.bz2
+*.xz
+*.iso
+*.cab
+
+# Audio
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.aac
+*.m4a
+*.wma
+*.opus
+*.aiff
+
+# OS / Editeurs
+Thumbs.db
+.DS_Store
+desktop.ini
+*.swp
+*~
