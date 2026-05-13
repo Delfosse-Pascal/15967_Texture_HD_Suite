@@ -1,3 +1,18 @@
+# ============================================================
+# Profondeur maximale : 1 niveau de sous-dossiers
+# Les dossiers depth-2+ sont exclus
+# ============================================================
+Texture_HD_A/gallery/
+Texture_HD_A/gettingstarted/
+Texture_HD_A/maps/
+Texture_HD_A/thumbs/
+Texture_HD_A/replace/
+Texture_HD_A/interface/
+Texture_HD_B/gallery/
+Texture_HD_B/maps/
+Texture_HD_B/thumbs/
+Texture_HD_B/interface/
+
 # Images
 *.jpg
 *.jpeg
@@ -42,7 +57,7 @@
 *.iso
 *.cab
 
-# Audio
+# Musique / Audio
 *.mp3
 *.wav
 *.flac
@@ -52,12 +67,27 @@
 *.wma
 *.opus
 *.aiff
+*.mid
+*.midi
+
+# Ebooks
+*.epub
+*.mobi
+*.azw
+*.azw3
+*.fb2
+*.lit
+*.pdb
+*.djvu
+*.djv
+*.cbz
+*.cbr
 
 # Executables / scripts auxiliaires
 *.exe
 tmp_gen_*.sh
 
-# Fichiers HTML originaux du DVD 3DTotal (extension .htm, non utilises par le site local)
+# Fichiers HTML originaux du DVD 3DTotal (extension .htm)
 *.htm
 autorun.inf
 
@@ -68,5 +98,5 @@ desktop.ini
 *.swp
 *~
 
-# Dossiers techniques (metadata Dreamweaver, etc.)
+# Dossiers techniques
 _notes/
