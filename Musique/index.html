@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Loge musicale — Tiroir des pistes</title>
+
+   <link rel="canonical" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/">
+   <link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.png" type="image/png" onerror="this.remove()">
+   <link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.ico" type="image/x-icon" onerror="this.remove()">
+   <link rel="stylesheet" type="text/css" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/style.css" onerror="this.remove()">
+   <script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/script.js" onerror="this.remove()"></script>
+   <script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/menu.js" defer onerror="this.remove()"></script>
+   <link rel="stylesheet" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/basedusite.css" onerror="this.remove()">
+
+   <link rel="stylesheet" href="../css/site.css">
+   <style>
+      .pistes-liste {
+         max-width: 900px;
+         margin: 24px auto;
+         padding: 0 20px;
+      }
+      .piste-carte {
+         background: var(--carte);
+         border: 2px solid var(--accent);
+         border-left: 6px solid var(--accent2);
+         border-radius: 6px;
+         padding: 14px 20px;
+         margin-bottom: 14px;
+         box-shadow: 0 4px 12px var(--ombre);
+         transition: all 0.3s;
+         display: flex;
+         flex-direction: column;
+         gap: 8px;
+      }
+      .piste-carte:hover {
+         transform: translateX(6px);
+         box-shadow: 0 6px 18px var(--ombre), 0 0 12px var(--ombre-or);
+      }
+      .piste-carte .titre-piste {
+         font-size: 24px;
+         color: var(--accent);
+         margin: 0;
+      }
+      .piste-carte audio {
+         width: 100%;
+      }
+   </style>
+</head>
+<body>
+
+   <div class="menus-haut">
+      <nav class="social-menu">
+         <ul>
+            <li><a href="https://fr.pinterest.com/pascal509/mes-tableaux-tous-genre/" target="_blank" rel="noopener">Pinterest</a></li>
+            <li><a href="https://www.flickr.com/photos/delfossepascal" target="_blank" rel="noopener">Flickr</a></li>
+            <li><a href="https://www.tumblr.com/lestoilesdepascal" target="_blank" rel="noopener">Tumblr</a></li>
+            <li><a href="https://x.com/PascalDelfossee" target="_blank" rel="noopener">X</a></li>
+            <li><a href="https://www.youtube.com/c/DelfossePascal" target="_blank" rel="noopener">YouTube</a></li>
+         </ul>
+      </nav>
+      <header></header>
+   </div>
+
+   <div class="boutons-haut">
+      <a href="../index.html" class="bouton">⌂ Retour à l'accueil</a>
+      <button id="btn-musique" class="btn-musique" title="Ouvrir le lecteur flottant">♪</button>
+      <button id="btn-theme" class="bouton" onclick="basculerTheme()">Mode sombre</button>
+   </div>
+
+   <h1 class="titre">Loge musicale</h1>
+   <p class="contexte">
+      Sept pistes d'ambiance accompagnent la suite. Vous pouvez les écouter individuellement
+      ci-dessous, ou cliquer sur la pastille colorée ♪ pour ouvrir un <strong>lecteur flottant
+      persistant</strong> qui continue de jouer pendant que vous naviguez sur le site.
+   </p>
+
+   <div class="pistes-liste">
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 1 — 00.mp3</h3>
+         <audio controls preload="metadata" src="00.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 2 — 01.mp3</h3>
+         <audio controls preload="metadata" src="01.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 3 — 02.mp3</h3>
+         <audio controls preload="metadata" src="02.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 4 — 03.mp3</h3>
+         <audio controls preload="metadata" src="03.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 5 — 04.mp3</h3>
+         <audio controls preload="metadata" src="04.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 6 — 05.mp3</h3>
+         <audio controls preload="metadata" src="05.mp3"></audio>
+      </article>
+      <article class="piste-carte">
+         <h3 class="titre-piste">♪ Piste 7 — 06.mp3</h3>
+         <audio controls preload="metadata" src="06.mp3"></audio>
+      </article>
+   </div>
+
+   <footer>Loge musicale — 7 pistes d'ambiance — Texture HD Suite</footer>
+   <script src="../js/site.js"></script>
+</body>
+</html>

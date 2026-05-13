@@ -1,8 +1,3 @@
-# Sous-dossiers : conserver uniquement les tiroirs de base
-Musique/*/
-Texture_HD_A/*/
-Texture_HD_B/*/
-
 # Images
 *.jpg
 *.jpeg
@@ -58,9 +53,20 @@ Texture_HD_B/*/
 *.opus
 *.aiff
 
+# Executables / scripts auxiliaires
+*.exe
+tmp_gen_*.sh
+
+# Fichiers HTML originaux du DVD 3DTotal (extension .htm, non utilises par le site local)
+*.htm
+autorun.inf
+
 # OS / Editeurs
 Thumbs.db
 .DS_Store
 desktop.ini
 *.swp
 *~
+
+# Dossiers techniques (metadata Dreamweaver, etc.)
+_notes/

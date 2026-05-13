@@ -1,0 +1,731 @@
+/* ============================================================
+   Theme Opera - Bordeaux / Ivoire / Or / Noir
+   Motifs : rideaux lourds, partitions, lustres, balcons
+   ============================================================ */
+
+:root {
+   --bordeaux: #6b1a2e;
+   --bordeaux-fonce: #3d0f1c;
+   --bordeaux-clair: #8e2240;
+   --ivoire: #f5ecd9;
+   --ivoire-doux: #ebe0c7;
+   --or: #d4af37;
+   --or-clair: #f0d878;
+   --or-fonce: #a8841d;
+   --noir: #0d0608;
+   --noir-velours: #1a0f12;
+   --ombre: rgba(13, 6, 8, 0.55);
+   --ombre-or: rgba(212, 175, 55, 0.35);
+
+   --fond: var(--ivoire);
+   --texte: var(--noir);
+   --carte: #fffaee;
+   --accent: var(--bordeaux);
+   --accent2: var(--or);
+   --bord: var(--bordeaux-fonce);
+}
+
+[data-theme="sombre"] {
+   --fond: var(--noir);
+   --texte: var(--ivoire);
+   --carte: var(--noir-velours);
+   --accent: var(--or);
+   --accent2: var(--or-clair);
+   --bord: var(--bordeaux);
+   --ombre: rgba(0, 0, 0, 0.85);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Pinyon Script", "Edwardian Script ITC", "Monotype Corsiva",
+                "Apple Chancery", "Lucida Calligraphy", "Brush Script MT", cursive;
+   background: var(--fond);
+   color: var(--texte);
+   min-height: 100vh;
+   transition: background 0.5s, color 0.5s;
+   position: relative;
+   overflow-x: hidden;
+}
+
+/* Rideaux velours en fond - SVG via background */
+body::before {
+   content: "";
+   position: fixed;
+   inset: 0;
+   z-index: -2;
+   background:
+      repeating-linear-gradient(90deg,
+         rgba(107, 26, 46, 0.10) 0px,
+         rgba(61, 15, 28, 0.18) 22px,
+         rgba(107, 26, 46, 0.10) 44px,
+         rgba(142, 34, 64, 0.20) 66px),
+      radial-gradient(ellipse at top, rgba(212, 175, 55, 0.10), transparent 65%);
+   pointer-events: none;
+   opacity: 0.7;
+}
+
+/* Lustres en haut */
+body::after {
+   content: "";
+   position: fixed;
+   top: -50px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 240px;
+   height: 240px;
+   background: radial-gradient(circle at center,
+      rgba(240, 216, 120, 0.35) 0%,
+      rgba(212, 175, 55, 0.20) 30%,
+      transparent 70%);
+   filter: blur(10px);
+   z-index: -1;
+   pointer-events: none;
+   animation: lustre 7s ease-in-out infinite;
+}
+@keyframes lustre {
+   0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+   50%      { opacity: 0.9; transform: translateX(-50%) scale(1.05); }
+}
+
+/* ============================================================
+   Menus en haut centres (social + header)
+   ============================================================ */
+.menus-haut {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 8px 0 4px;
+   gap: 4px;
+   background: linear-gradient(180deg,
+      var(--noir) 0%,
+      var(--bordeaux-fonce) 50%,
+      var(--noir) 100%);
+   border-bottom: 4px double var(--or);
+   box-shadow: 0 6px 16px var(--ombre), inset 0 -2px 0 var(--or-fonce);
+   position: relative;
+}
+.menus-haut::before,
+.menus-haut::after {
+   content: "";
+   position: absolute;
+   top: 0;
+   width: 60px;
+   height: 100%;
+   background: linear-gradient(90deg,
+      rgba(107, 26, 46, 0.85),
+      rgba(107, 26, 46, 0.3) 60%,
+      transparent);
+   pointer-events: none;
+}
+.menus-haut::before { left: 0; }
+.menus-haut::after { right: 0; transform: scaleX(-1); }
+
+.social-menu { width: 100%; }
+.social-menu ul,
+header nav.menu ul,
+header > ul {
+   list-style: none;
+   margin: 0;
+   padding: 6px 0;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 14px;
+}
+.social-menu ul li a,
+header nav.menu ul li a,
+header > ul li a {
+   color: var(--ivoire) !important;
+   text-decoration: none;
+   padding: 6px 16px;
+   font-size: 18px;
+   font-family: inherit;
+   letter-spacing: 1px;
+   border: 1px solid transparent;
+   border-radius: 3px;
+   transition: all 0.3s;
+   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+.social-menu ul li a:hover,
+header nav.menu ul li a:hover,
+header > ul li a:hover {
+   background: var(--or);
+   color: var(--bordeaux-fonce) !important;
+   border-color: var(--or-clair);
+   box-shadow: 0 0 12px var(--ombre-or);
+   text-shadow: none;
+}
+
+header { width: 100%; display: flex; justify-content: center; }
+header:empty { display: none; }
+
+/* ============================================================
+   Barre boutons (retour, theme, musique)
+   ============================================================ */
+.boutons-haut {
+   display: flex;
+   justify-content: center;
+   gap: 14px;
+   padding: 18px 12px;
+   flex-wrap: wrap;
+   position: relative;
+   z-index: 1;
+}
+.bouton {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 11px 26px;
+   background: linear-gradient(160deg, var(--bordeaux) 0%, var(--bordeaux-fonce) 100%);
+   color: var(--ivoire);
+   text-decoration: none;
+   border: 2px solid var(--or);
+   border-radius: 4px;
+   cursor: pointer;
+   font-family: inherit;
+   font-size: 20px;
+   letter-spacing: 1px;
+   box-shadow: 0 4px 12px var(--ombre), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+   transition: all 0.35s;
+   position: relative;
+   overflow: hidden;
+}
+.bouton::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+   transform: translateX(-100%);
+   transition: transform 0.6s;
+}
+.bouton:hover::before { transform: translateX(100%); }
+.bouton:hover {
+   transform: translateY(-3px);
+   box-shadow: 0 8px 18px var(--ombre), 0 0 16px var(--ombre-or);
+   background: linear-gradient(160deg, var(--bordeaux-clair), var(--bordeaux));
+   border-color: var(--or-clair);
+   color: var(--or-clair);
+}
+
+/* Bouton musique multicolore */
+.btn-musique {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   border: 3px solid var(--or);
+   background: conic-gradient(from 0deg,
+      #e63946, #f1c453, #43aa8b, #277da1, #9b5de5, #f15bb5, #e63946);
+   cursor: pointer;
+   padding: 0;
+   font-size: 26px;
+   color: var(--noir);
+   box-shadow: 0 0 18px var(--ombre-or), 0 4px 10px var(--ombre);
+   animation: tournoi 9s linear infinite;
+   transition: transform 0.3s;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+}
+.btn-musique:hover {
+   transform: scale(1.12);
+   box-shadow: 0 0 28px var(--or), 0 6px 14px var(--ombre);
+}
+@keyframes tournoi {
+   to { background: conic-gradient(from 360deg,
+      #e63946, #f1c453, #43aa8b, #277da1, #9b5de5, #f15bb5, #e63946); }
+}
+
+/* ============================================================
+   Titres + contexte
+   ============================================================ */
+h1.titre {
+   text-align: center;
+   font-size: 58px;
+   margin: 24px 0 8px;
+   color: var(--accent);
+   text-shadow:
+      2px 2px 0 var(--accent2),
+      4px 4px 12px var(--ombre),
+      0 0 20px var(--ombre-or);
+   letter-spacing: 3px;
+   font-weight: normal;
+   animation: apparait 0.8s ease-out;
+}
+h2.sous-titre {
+   text-align: center;
+   font-size: 34px;
+   color: var(--accent2);
+   margin: 30px 0 14px;
+   letter-spacing: 2px;
+}
+@keyframes apparait {
+   from { opacity: 0; transform: translateY(-20px); }
+   to   { opacity: 1; transform: translateY(0); }
+}
+
+.contexte {
+   max-width: 880px;
+   margin: 0 auto 28px;
+   padding: 18px 28px;
+   background: var(--carte);
+   border-left: 5px solid var(--accent);
+   border-right: 5px solid var(--accent);
+   border-top: 1px solid var(--accent2);
+   border-bottom: 1px solid var(--accent2);
+   font-size: 19px;
+   text-align: center;
+   line-height: 1.6;
+   box-shadow: 0 4px 14px var(--ombre);
+   position: relative;
+}
+.contexte::before,
+.contexte::after {
+   content: "❦";
+   color: var(--accent2);
+   font-size: 24px;
+   margin: 0 8px;
+}
+
+/* ============================================================
+   Grille accueil - cases variees (rond / rect / carre)
+   ============================================================ */
+.grille-accueil {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   gap: 24px;
+   padding: 28px;
+   max-width: 1400px;
+   margin: 0 auto;
+}
+.carte {
+   color: var(--ivoire);
+   text-decoration: none;
+   padding: 26px 20px;
+   text-align: center;
+   background: linear-gradient(160deg, var(--bordeaux), var(--bordeaux-fonce));
+   border: 3px solid var(--or);
+   border-radius: 8px;
+   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+   box-shadow: 0 6px 18px var(--ombre), inset 0 0 0 1px rgba(212, 175, 55, 0.3);
+   min-height: 180px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 6px;
+   position: relative;
+   overflow: hidden;
+}
+.carte::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.22), transparent 60%);
+   opacity: 0;
+   transition: opacity 0.4s;
+}
+.carte:hover::before { opacity: 1; }
+.carte:hover {
+   transform: translateY(-8px) rotate(-1deg);
+   box-shadow: 0 14px 30px var(--ombre), 0 0 22px var(--ombre-or);
+   border-color: var(--or-clair);
+}
+.carte h3 {
+   margin: 0;
+   font-size: 28px;
+   color: var(--or-clair);
+   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+   letter-spacing: 1px;
+   position: relative;
+   z-index: 1;
+}
+.carte p {
+   margin: 0;
+   font-family: "Georgia", serif;
+   font-size: 14px;
+   opacity: 0.92;
+   position: relative;
+   z-index: 1;
+   color: var(--ivoire-doux);
+}
+.carte .miniature {
+   width: 64px;
+   height: 64px;
+   border-radius: 6px;
+   margin-bottom: 8px;
+   border: 2px solid var(--or);
+   object-fit: cover;
+}
+.carte.ronde { border-radius: 50%; aspect-ratio: 1/1; }
+.carte.ronde .miniature { border-radius: 50%; }
+.carte.carre { border-radius: 0; aspect-ratio: 1/1; }
+.carte.rect { /* default */ }
+.carte.large { grid-column: span 2; }
+
+/* ============================================================
+   Galerie images
+   ============================================================ */
+.galerie {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+   gap: 14px;
+   padding: 24px;
+   max-width: 1500px;
+   margin: 0 auto;
+}
+.vignette {
+   background: var(--carte);
+   border: 2px solid var(--accent);
+   border-radius: 6px;
+   padding: 6px;
+   box-shadow: 0 4px 12px var(--ombre);
+   transition: all 0.35s;
+   cursor: pointer;
+   overflow: hidden;
+   text-align: center;
+   position: relative;
+}
+.vignette::after {
+   content: "";
+   position: absolute;
+   inset: 0;
+   border: 1px solid var(--accent2);
+   pointer-events: none;
+   opacity: 0;
+   transition: opacity 0.3s;
+}
+.vignette:hover {
+   transform: translateY(-5px) scale(1.05);
+   box-shadow: 0 10px 22px var(--ombre), 0 0 18px var(--ombre-or);
+   border-color: var(--accent2);
+}
+.vignette:hover::after { opacity: 1; }
+.vignette img {
+   width: 100%;
+   height: 140px;
+   object-fit: cover;
+   display: block;
+   border-radius: 4px;
+}
+.infos {
+   margin-top: 6px;
+   font-size: 12px;
+   color: var(--texte);
+   font-family: "Georgia", serif;
+   line-height: 1.4;
+   padding: 2px;
+}
+.infos .dims { color: var(--accent); font-style: italic; }
+.infos .taille { color: var(--accent2); font-weight: bold; }
+
+/* ============================================================
+   Lightbox
+   ============================================================ */
+.lightbox {
+   display: none;
+   position: fixed;
+   top: 0; left: 0;
+   width: 100vw; height: 100vh;
+   background: rgba(13, 6, 8, 0.96);
+   z-index: 9999;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   backdrop-filter: blur(4px);
+}
+.lightbox.actif { display: flex; animation: fondu 0.25s ease-out; }
+@keyframes fondu { from { opacity: 0; } to { opacity: 1; } }
+.lightbox img {
+   max-width: 92vw;
+   max-height: 82vh;
+   border: 4px solid var(--or);
+   box-shadow: 0 0 40px var(--or), 0 0 80px var(--ombre);
+   border-radius: 4px;
+}
+.lightbox .ferme {
+   position: absolute;
+   top: 18px; right: 26px;
+   font-size: 46px;
+   color: var(--or);
+   cursor: pointer;
+   user-select: none;
+   font-family: Arial, sans-serif;
+   transition: transform 0.2s, color 0.2s;
+   text-shadow: 0 0 8px var(--noir);
+}
+.lightbox .ferme:hover { transform: rotate(90deg); color: var(--or-clair); }
+.lightbox .info-bas {
+   color: var(--ivoire);
+   margin-top: 14px;
+   font-size: 16px;
+   font-family: "Georgia", serif;
+   text-align: center;
+   max-width: 90vw;
+   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+   text-align: center;
+   padding: 22px 14px;
+   color: var(--texte);
+   font-size: 14px;
+   font-family: "Georgia", serif;
+   border-top: 3px double var(--accent);
+   margin-top: 40px;
+   opacity: 0.85;
+   background: linear-gradient(180deg, transparent, rgba(107, 26, 46, 0.08));
+}
+footer::before {
+   content: "♪ ♫ ♪";
+   display: block;
+   color: var(--accent2);
+   font-size: 22px;
+   margin-bottom: 8px;
+   letter-spacing: 6px;
+}
+
+/* ============================================================
+   Pagination
+   ============================================================ */
+.pagination {
+   display: flex;
+   justify-content: center;
+   gap: 10px;
+   padding: 20px;
+   flex-wrap: wrap;
+}
+.pagination a, .pagination span {
+   padding: 8px 16px;
+   background: var(--carte);
+   border: 2px solid var(--accent);
+   color: var(--texte);
+   text-decoration: none;
+   border-radius: 4px;
+   font-family: "Georgia", serif;
+   font-size: 15px;
+   transition: all 0.25s;
+}
+.pagination a:hover, .pagination .actuel {
+   background: var(--accent);
+   color: var(--ivoire);
+   border-color: var(--accent2);
+}
+
+/* ============================================================
+   Specifique accueil principal
+   ============================================================ */
+.accueil-hero {
+   text-align: center;
+   padding: 36px 16px 12px;
+   position: relative;
+}
+.accueil-hero h1 {
+   font-size: 78px;
+   margin: 0 0 6px;
+}
+.accueil-hero .sous {
+   font-family: "Georgia", serif;
+   font-style: italic;
+   color: var(--accent2);
+   font-size: 19px;
+   letter-spacing: 2px;
+}
+.balcon {
+   max-width: 1300px;
+   margin: 0 auto 30px;
+   padding: 0 24px;
+}
+.balcon h2 {
+   font-size: 38px;
+   color: var(--accent);
+   border-bottom: 2px solid var(--accent2);
+   padding-bottom: 6px;
+   margin-top: 36px;
+   letter-spacing: 2px;
+}
+
+/* Partition decorative */
+.partition {
+   text-align: center;
+   color: var(--accent2);
+   font-size: 28px;
+   letter-spacing: 12px;
+   margin: 14px 0;
+   opacity: 0.7;
+}
+
+/* ============================================================
+   Lecteur audio (popup)
+   ============================================================ */
+.lecteur-corps {
+   margin: 0;
+   padding: 18px;
+   font-family: "Pinyon Script", "Edwardian Script ITC", cursive;
+   background: linear-gradient(180deg, var(--noir), var(--bordeaux-fonce));
+   color: var(--ivoire);
+   min-height: 100vh;
+}
+.lecteur-titre {
+   text-align: center;
+   font-size: 36px;
+   color: var(--or-clair);
+   margin: 0 0 14px;
+   text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+.lecteur-piste-en-cours {
+   text-align: center;
+   font-family: "Georgia", serif;
+   font-style: italic;
+   margin: 4px 0 12px;
+   color: var(--ivoire-doux);
+   min-height: 22px;
+}
+.lecteur-controles {
+   display: flex;
+   justify-content: center;
+   gap: 8px;
+   margin: 12px 0;
+   flex-wrap: wrap;
+}
+.lecteur-controles button {
+   background: linear-gradient(160deg, var(--bordeaux), var(--bordeaux-fonce));
+   color: var(--ivoire);
+   border: 2px solid var(--or);
+   border-radius: 50%;
+   width: 48px;
+   height: 48px;
+   font-size: 20px;
+   cursor: pointer;
+   transition: all 0.2s;
+}
+.lecteur-controles button:hover {
+   transform: scale(1.1);
+   box-shadow: 0 0 14px var(--or);
+}
+.lecteur-liste {
+   list-style: none;
+   padding: 0;
+   margin: 14px 0 0;
+}
+.lecteur-liste li {
+   padding: 10px 14px;
+   border-left: 4px solid var(--or);
+   background: rgba(245, 236, 217, 0.05);
+   margin-bottom: 6px;
+   cursor: pointer;
+   font-family: "Georgia", serif;
+   font-size: 15px;
+   transition: all 0.2s;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.lecteur-liste li:hover { background: rgba(212, 175, 55, 0.15); }
+.lecteur-liste li.actif { background: var(--bordeaux); color: var(--or-clair); border-left-color: var(--or-clair); }
+.lecteur-progres {
+   width: 100%;
+   height: 6px;
+   background: rgba(245, 236, 217, 0.2);
+   border-radius: 3px;
+   overflow: hidden;
+   margin: 8px 0;
+}
+.lecteur-progres .barre {
+   height: 100%;
+   background: linear-gradient(90deg, var(--or), var(--or-clair));
+   width: 0%;
+   transition: width 0.2s;
+}
+
+/* ============================================================
+   Decor flottant (notes de musique)
+   ============================================================ */
+.note-flottante {
+   position: fixed;
+   pointer-events: none;
+   z-index: 0;
+   opacity: 0.08;
+   font-size: 200px;
+   color: var(--accent);
+   animation: flotte 14s ease-in-out infinite;
+   user-select: none;
+}
+.note-flottante.n1 { top: 10%; left: 4%; }
+.note-flottante.n2 { top: 60%; right: 5%; animation-delay: -4s; font-size: 160px; }
+.note-flottante.n3 { bottom: 12%; left: 8%; animation-delay: -8s; font-size: 180px; }
+@keyframes flotte {
+   0%, 100% { transform: translateY(0) rotate(0deg); }
+   50%      { transform: translateY(-26px) rotate(10deg); }
+}
+
+/* Liste artistes */
+.liste-artistes {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+   gap: 16px;
+   padding: 24px;
+   max-width: 1400px;
+   margin: 0 auto;
+}
+.artiste-carte {
+   display: block;
+   text-decoration: none;
+   text-align: center;
+   padding: 16px 12px;
+   background: var(--carte);
+   border: 2px solid var(--accent);
+   border-radius: 8px;
+   color: var(--texte);
+   transition: all 0.3s;
+   box-shadow: 0 4px 10px var(--ombre);
+}
+.artiste-carte:hover {
+   transform: translateY(-5px);
+   border-color: var(--accent2);
+   box-shadow: 0 10px 20px var(--ombre), 0 0 14px var(--ombre-or);
+}
+.artiste-carte .nom {
+   font-size: 18px;
+   color: var(--accent);
+   margin-top: 8px;
+   font-family: inherit;
+   letter-spacing: 1px;
+}
+.artiste-carte img {
+   width: 100%;
+   max-width: 140px;
+   aspect-ratio: 1;
+   object-fit: cover;
+   border-radius: 6px;
+   border: 1px solid var(--accent2);
+}
+
+/* Pages getting started / tutos */
+.tuto-corps {
+   max-width: 900px;
+   margin: 24px auto;
+   padding: 28px 36px;
+   background: var(--carte);
+   border: 2px solid var(--accent);
+   border-radius: 8px;
+   box-shadow: 0 6px 18px var(--ombre);
+   font-family: "Georgia", serif;
+   font-size: 17px;
+   line-height: 1.7;
+}
+.tuto-corps h2 { font-family: inherit; color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 700px) {
+   h1.titre { font-size: 40px; }
+   .accueil-hero h1 { font-size: 50px; }
+   .bouton { padding: 9px 18px; font-size: 17px; }
+   .carte h3 { font-size: 22px; }
+}

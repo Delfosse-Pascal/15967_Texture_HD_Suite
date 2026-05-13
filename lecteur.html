@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Lecteur Musique - Texture HD Suite</title>
+   <link rel="canonical" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/">
+   <link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.png" type="image/png" onerror="this.remove()">
+   <link rel="icon" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/favicondepascal.ico" type="image/x-icon" onerror="this.remove()">
+   <link rel="stylesheet" type="text/css" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/style.css" onerror="this.remove()">
+   <script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/script.js" onerror="this.remove()"></script>
+   <script src="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/menu.js" defer onerror="this.remove()"></script>
+   <link rel="stylesheet" href="https://filedn.eu/llN3kr5vmyEBPIWCwFj3O6h/Site_Web/basedusite.css" onerror="this.remove()">
+   <link rel="stylesheet" href="css/site.css">
+</head>
+<body class="lecteur-corps">
+   <h1 class="lecteur-titre">♪ Loge musicale ♪</h1>
+   <div class="lecteur-piste-en-cours" id="piste-courante">Choisissez une piste...</div>
+
+   <audio id="audio" preload="metadata"></audio>
+
+   <div class="lecteur-progres">
+      <div class="barre" id="barre-progres"></div>
+   </div>
+   <div style="display:flex;justify-content:space-between;font-family:Georgia,serif;font-size:13px;color:#ebe0c7;margin:-4px 4px 4px;">
+      <span id="temps-actuel">00:00</span>
+      <span id="temps-total">00:00</span>
+   </div>
+
+   <div class="lecteur-controles">
+      <button id="btn-prec" title="Precedente">⏮</button>
+      <button id="btn-lect" title="Lire / Pause">▶</button>
+      <button id="btn-stop" title="Stop">⏹</button>
+      <button id="btn-suiv" title="Suivante">⏭</button>
+   </div>
+
+   <div style="text-align:center;font-family:Georgia,serif;font-size:13px;color:#ebe0c7;">
+      <label for="volume">Volume :</label>
+      <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7" style="vertical-align:middle;">
+   </div>
+
+   <ul class="lecteur-liste" id="liste-pistes">
+      <li data-src="Musique/00.mp3"><span>Piste 1 — 00.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/01.mp3"><span>Piste 2 — 01.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/02.mp3"><span>Piste 3 — 02.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/03.mp3"><span>Piste 4 — 03.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/04.mp3"><span>Piste 5 — 04.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/05.mp3"><span>Piste 6 — 05.mp3</span><span class="duree"></span></li>
+      <li data-src="Musique/06.mp3"><span>Piste 7 — 06.mp3</span><span class="duree"></span></li>
+   </ul>
+
+   <p style="text-align:center;font-family:Georgia,serif;font-size:12px;color:#ebe0c7;opacity:0.7;margin-top:18px;">
+      Cette fenetre peut rester ouverte pendant que vous naviguez sur le site.<br>
+      La musique continue sans s'arreter.
+   </p>
+
+   <script>
+      (function () {
+         const audio = document.getElementById('audio');
+         const piste = document.getElementById('piste-courante');
+         const btnLect = document.getElementById('btn-lect');
+         const btnStop = document.getElementById('btn-stop');
+         const btnPrec = document.getElementById('btn-prec');
+         const btnSuiv = document.getElementById('btn-suiv');
+         const volume = document.getElementById('volume');
+         const barre = document.getElementById('barre-progres');
+         const tempsA = document.getElementById('temps-actuel');
+         const tempsT = document.getElementById('temps-total');
+         const liste = document.getElementById('liste-pistes');
+         const items = Array.from(liste.querySelectorAll('li'));
+
+         let idx = -1;
+
+         function format(s) {
+            if (!isFinite(s)) return '00:00';
+            const m = Math.floor(s / 60);
+            const r = Math.floor(s % 60);
+            return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r;
+         }
+
+         function charger(i, lire) {
+            if (i < 0 || i >= items.length) return;
+            idx = i;
+            const li = items[i];
+            audio.src = li.dataset.src;
+            piste.textContent = li.querySelector('span').textContent;
+            items.forEach(function (x) { x.classList.remove('actif'); });
+            li.classList.add('actif');
+            if (lire) audio.play().catch(function () {});
+         }
+
+         items.forEach(function (li, i) {
+            li.addEventListener('click', function () { charger(i, true); });
+         });
+
+         btnLect.addEventListener('click', function () {
+            if (idx === -1) charger(0, true);
+            else if (audio.paused) audio.play().catch(function () {});
+            else audio.pause();
+         });
+         btnStop.addEventListener('click', function () { audio.pause(); audio.currentTime = 0; });
+         btnPrec.addEventListener('click', function () { charger((idx - 1 + items.length) % items.length, true); });
+         btnSuiv.addEventListener('click', function () { charger((idx + 1) % items.length, true); });
+
+         audio.addEventListener('play', function () { btnLect.textContent = '⏸'; });
+         audio.addEventListener('pause', function () { btnLect.textContent = '▶'; });
+         audio.addEventListener('ended', function () { charger((idx + 1) % items.length, true); });
+         audio.addEventListener('loadedmetadata', function () { tempsT.textContent = format(audio.duration); });
+         audio.addEventListener('timeupdate', function () {
+            tempsA.textContent = format(audio.currentTime);
+            if (audio.duration) barre.style.width = (audio.currentTime / audio.duration * 100) + '%';
+         });
+
+         volume.addEventListener('input', function () { audio.volume = parseFloat(volume.value); });
+         audio.volume = parseFloat(volume.value);
+
+         // Pre-chargement des durees
+         items.forEach(function (li) {
+            const a = new Audio();
+            a.preload = 'metadata';
+            a.src = li.dataset.src;
+            a.addEventListener('loadedmetadata', function () {
+               li.querySelector('.duree').textContent = format(a.duration);
+            });
+         });
+
+         // Empeche fermeture accidentelle (commente : laisse l'utilisateur fermer librement)
+         // window.addEventListener('beforeunload', function (e) { e.preventDefault(); return ''; });
+      })();
+   </script>
+</body>
+</html>
